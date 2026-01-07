@@ -1,0 +1,458 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/* variable declarations */
+:root {
+    --Primary: #e52165;
+    --Primary-light: #b50b47e1;
+    --Secondary: #0d1137;
+    --Secondary-light: #0d1137be;
+}
+::selection {
+    background-color: var(--Primary);
+    color: var(--Secondary);
+}
+.fa-bars {
+    color: white;
+}
+/* Remove Browser styles */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+li {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+/*common styles*/
+.btn {
+    color: white;
+    display: inline-block;
+    background-color: var(--Primary);
+    padding: 10px 18px;
+    transition: 300ms;
+
+}
+.btn:hover {
+    transform: translateY(5px);
+}
+.flex-design {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*styles*/
+header {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.111),rgba(0, 0, 0, 0.988)),url(/images/cover.png);
+    background-size: cover;
+    background-position: right;
+    position: relative;
+
+}
+.header-content {
+    padding:0 2rem;
+    background-color: var(--Secondary);
+    margin: auto;
+    height: 12vh;
+}
+.logo {
+    height: 90px;
+}
+.nav-links {
+    display: flex;
+    width: 60%;
+}
+.nav-links a {
+    color: white;
+}
+.nav-links li::after {
+    content: '';
+    display: block;
+    background-color: var(--Primary);
+    height: 2px;
+    /* width: 0%; */
+    transform: scaleX(0);
+    transition: transform 300ms;
+
+}
+.nav-links li:hover::after {
+    transform: scaleX(1);
+}
+.burger {
+    display: none;
+    cursor: pointer;
+}
+.text-center {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    transition: all 300ms;
+}
+.text-center h1 {
+   margin: 1.2rem 0;
+}
+.content {
+    max-width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mb {
+    margin-bottom: 3rem;
+}
+.mt {
+    margin-top: 5rem;
+}
+.heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+
+.wwa-box {
+    background-color: var(--Primary);
+    padding: 20px;
+    margin-left: 10px;
+    text-align: center;
+    color: white;
+}
+.wwa-box h3 {
+    margin-bottom: 5px;
+}
+.wwa-box:first-child {
+    margin-left: 0px;
+}
+.wwa-box:hover {
+    box-shadow: 3px 5px 11px 0px rgba(0, 0, 0, 0.236);
+}
+.course_img {
+    position: relative;
+}
+.course_img img {
+    display: block;
+}
+.course_img::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scale(0,1);
+    transform-origin: right;
+    transition: transform 300ms;
+    background-color: rgba(0, 0, 0, 0.52);
+}
+.course:hover .course_img::after {
+    transform: scale(1);
+    transform-origin: left;
+
+}
+.course {
+    position: relative;
+}
+.course_content {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: top 300ms, opacity 350ms;
+    transition-delay: 200ms;
+}
+.course:hover .course_content {
+    top: 50%;
+    opacity: 1;
+}
+.course-content {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+}
+/* 1. Container: Forces items into a single horizontal row */
+.fac-content {
+    display: flex;
+    flex-direction: row;      /* horizontal layout */
+    flex-wrap: nowrap;       /* prevents items from jumping to next line */
+    overflow-x: auto;         /* allows horizontal scrolling if content exceeds width */
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+/* 2. Individual Card: Defines the landscape shape */
+.fac {
+    background-color: var(--Primary);
+    flex: 0 0 80%;           /* Card takes 80% of screen width (one-by-one feel) */
+    height: 450px;           /* Fixed height for landscape aspect ratio */
+    position: relative;
+    overflow: hidden;        /* CRITICAL: Keeps the sliding image inside the card */
+    border-radius: 12px;
+}
+
+/* 3. The Image Container */
+.fac-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform 0.6s ease-in-out; /* Smoother than 'left' */
+}
+
+.fac-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* Ensures photo fills landscape area without stretching */
+    display: block;
+}
+
+/* 4. The Text (Hidden behind the image) */
+.fac-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    color: white;
+    text-align: center;
+    z-index: 1;
+}
+
+/* 5. The Hover Effect: Slides the image within the container */
+.fac:hover .fac-image {
+    /* Moves the image 100% to the right, but 'overflow: hidden' 
+       on the .fac parent keeps it from leaving the screen */
+    transform: translateX(100%); 
+}
+
+.fac:hover .fac-image > img {
+    box-shadow: -30px 0px 100px 3px rgba(0,0,0,0.5);
+}
+
+/* Optional: Custom Scrollbar for the horizontal row */
+.fac-content::-webkit-scrollbar {
+    height: 8px;
+}
+.fac-content::-webkit-scrollbar-thumb {
+    background: var(--Primary);
+    border-radius: 10px;
+}
+.footer-logo {
+    height: 150px;
+    width: 150px;
+}
+.footer-top {
+    background-color: var(--Secondary);
+    color: white;
+}
+.footer-links a {
+    color: white;
+}
+.footer-bottom {
+    background-color: var(--Secondary-light);
+    text-align: center;
+    color: white;
+    padding: 0.6rem 0;
+}
+.about-us-text {
+    position: relative;
+    padding:0 2rem;
+}
+.about-us-text::after {
+    content: '';
+    position: absolute;
+    inset: -100px 0 0 -100px;
+    background-image: url(https://th.bing.com/th/id/OIP.EQnx69jeJ2VOZ7ks2a8WPAHaHa?pid=ImgDet&rs=1);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    z-index: -1;
+}
+.our-students {
+    background-color: var(--Secondary-light);
+    color: white;
+    padding: 3rem;
+}
+.student {
+    margin-top: 3rem;
+}
+.student-text {
+    width: 100%;
+    padding: 2rem;
+    line-height: 1.8rem;
+}
+.register-now {
+    padding: 2rem 0;
+    background-color: var(--Primary-light);
+}
+.register-now-heading {
+    color: white;
+}
+.register-now-content {
+    padding:0 2rem;
+    text-align: center;
+}
+.student:nth-child(even) {
+    flex-direction: row-reverse;
+}
+/*course table*/
+.course-table-section {
+    background-color: var(--Primary-light);
+    padding: 2rem 0;
+}
+.course-table th, .course-table td {
+    padding: 1rem;
+}
+.course-table th {
+    color: var(--Secondary);
+    background-color: white;
+}
+.course-table-content {
+    max-width: 600px;
+    text-align: center;
+}
+.course-table tr {
+    transition: transform 300ms;
+}
+.course-table tr:not(:first-child):hover {
+    transform: scale(1.01);
+}
+.course-table tr:nth-child(odd) {
+    background-color: var(--Secondary);
+    color: white;
+}
+.course-table tr:nth-child(even) {
+    background-color: var(--Primary-light);
+    color: white;
+}
+.course-table tr a {
+    color: white;
+    text-decoration: none;
+    background-color: green;
+    padding: 7px 10px;
+}
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    filter: drop-shadow(-20px -10px 20px);
+}
+.center i {
+    color: var(--Primary);
+    margin-right: 15px;
+}
+.center i {
+    transition: transform 300ms;
+}
+.center:hover i {
+    transform: translate(20px,-15px) scale(1.3);
+}
+.info-center-content {
+    display: grid;
+    grid-row-gap: 100px;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+}
+input,textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 6px;
+    border: none;
+    border-bottom: 1px solid var(--Primary-light);
+}
+input:focus, textarea:focus {
+    border: none;
+    color: white;
+    outline: none;
+    background-color: var(--Primary-light);
+    border-bottom: 1px solid var(--Primary);
+}
+.form h2 {
+    display: inline-block;
+}
+.form h2::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 70%;
+    background-color: var(--Primary);
+}
+/*media queries*/
+@media only screen and (max-width:762px) {
+    .footer-top-container {
+        flex-direction: column;
+    }
+    .footer-links {
+        margin-bottom: 1rem;
+    }
+    .footer-college {
+        text-align: center;
+    }
+}
+@media only screen and (max-width:840px) {
+    .student, .student:nth-child(even) {
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width:920px) {
+    .fac:hover .fac-image {
+        opacity: 0;
+    }
+}
+@media only screen and (max-width:894px) {
+.text-center {
+    width: 100%;
+}
+}
+@media only screen and (max-width:8858px) {
+    .wwa-content {
+        flex-direction: column;
+    }
+    .wwa-box {
+        margin-left: 0px;
+        margin-top: 50px;
+    }
+    .wwa-box:first-child {
+        margin-top: 0px;
+    }
+}
+@media only screen and (max-width:600px) {
+    .nav-links {
+       /*display: none;*/
+       position: absolute;
+       flex-direction: column;
+       background-color: var(--Secondary-light);
+       right: -10rem;
+       top: 12vh;
+       height: 50vh;
+       width: 0%;
+       padding: 1.5rem 0;
+       transition: all 400ms;
+
+    }
+    .burger {
+       display: block;
+    }
+}
+.nav-show {
+    width: 100%;
+    right: 0px;
+}
+.textareahide {
+    left: -15rem;
+}
